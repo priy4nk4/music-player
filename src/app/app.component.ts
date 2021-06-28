@@ -1,17 +1,19 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Track } from 'ngx-audio-player';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PlaylistModalComponent } from './playlist-modal/playlist-modal.component';
-import {ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { MusicService } from './service/music.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
-  constructor(private modalService: NgbModal, private cdref: ChangeDetectorRef){
+  constructor(private modalService: NgbModal, private cdref: ChangeDetectorRef, private music: MusicService){
   }
   title = 'music-player';
   @ViewChild('player', { static: false })
@@ -19,25 +21,18 @@ export class AppComponent {
   msaapTitleHeader!:string;
   msaapArtistHeader!: string;
 
-  blues: Track[] = [
-    {
-      title: 'bensound',
-      link: 'https://www.bensound.com/bensound-music/bensound-dubstep.mp3',
-      duration: 185,
-      artist: 'The Kyoto'
-    },
-    {
-      title: 'bensound',
-      link: 'https://www.bensound.com/bensound-music/bensound-dubstep.mp3',
-      duration: 185,
-      artist: 'The Kyoto'
-    }
-  ];
-
+  playList!: Track[];
   currentTrack: any = null;
   currentTime: any;
-  appendTracksToPlaylistDisable = false;
+  // appendTracksToPlaylistDisable = false;
   counter = 1;
+  ngOnInit() {
+    this.music.getMusiclist().subscribe((response: Track[]) => {
+      this.playList = response;
+    });
+    this.currentTrack = this.playList;
+  }
+
   ngAfterContentChecked() {
     this.msaapTableHeader = 'My Playlist';
     this.msaapTitleHeader = 'My Title';
@@ -48,6 +43,9 @@ export class AppComponent {
   onEnded(event: any) {
     console.log(event);
     this.currentTrack = null;
+  }
+  playSong(index: number){
+    this.currentTrack = this.playList.slice(index);
   }
   updatePlayList(){
     this.modalService.open(PlaylistModalComponent);

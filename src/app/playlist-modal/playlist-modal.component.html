@@ -2,7 +2,6 @@
 <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-  
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <div class="bg-gray-600 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -20,25 +19,21 @@
                     <h3 class="text-lg leading-6 font-medium text-black">
                         New Playlist
                     </h3>
-                  </div>
+                </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 ">
-                <!-- <div class="flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8"> -->
-                        <!-- <input type="hidden" name="remember" value="true"> -->
-                        <div class="flex items-center justify-around">
-                            <div>
-                                <label for="title" class="sr-only">Playlist title</label>
-                                <input id="playlist" name="name" type="text" autocomplete="text" required class="appearance-none border-0 
-                                relative block w-full px-3 py-2  border-b-2 placeholder-gray-500 text-gray-900 focus:outline-nones" placeholder="Playlist Title" #myname>
-                            </div>
-                            <div>
-                               <button type="button" (click)="CreatePlaylist()">Save</button>
-                            </div>
-                        </div>
-                <!-- </div> -->
+                <div class="flex items-center justify-around">
+                    <div>
+                        <label for="title" class="sr-only">Playlist title</label>
+                        <input id="playlist" name="name" type="text" autocomplete="text" required class="appearance-none border-0 
+                        relative block w-full px-3 py-2  border-b-2 placeholder-gray-500 text-gray-900 focus:outline-nones" placeholder="Playlist Title" #myname>
+                    </div>
+                    <div>
+                    <button type="button" (click)="CreatePlaylist()">Save</button>
+                    </div>
+                </div>
             </div>
-          </div>
-  
+        </div>
     </div>
   </div>
   
