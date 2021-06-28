@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Track } from 'ngx-audio-player';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PlaylistModalComponent } from './playlist-modal/playlist-modal.component';
+import {ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +10,14 @@ import { Track } from 'ngx-audio-player';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(private modalService: NgbModal, private cdref: ChangeDetectorRef){
+  }
   title = 'music-player';
   @ViewChild('player', { static: false })
-  pageSizeOptions = [2, 4, 6];
-
-  msaapTableHeader = 'My Playlist';
-  msaapTitleHeader = 'My Title';
-  msaapArtistHeader = 'My Artist';
-  msaapDurationHeader = 'My Duration';
+  msaapTableHeader! :string;
+  msaapTitleHeader!:string;
+  msaapArtistHeader!: string;
 
   blues: Track[] = [
     {
@@ -33,12 +36,20 @@ export class AppComponent {
 
   currentTrack: any = null;
   currentTime: any;
-
   appendTracksToPlaylistDisable = false;
   counter = 1;
-  
+  ngAfterContentChecked() {
+    this.msaapTableHeader = 'My Playlist';
+    this.msaapTitleHeader = 'My Title';
+    this.msaapArtistHeader = 'My Artist';
+    this.cdref.detectChanges();
+  }
+
   onEnded(event: any) {
     console.log(event);
     this.currentTrack = null;
+  }
+  updatePlayList(){
+    this.modalService.open(PlaylistModalComponent);
   }
 }

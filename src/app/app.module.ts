@@ -7,10 +7,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PlaylistModalComponent } from './playlist-modal/playlist-modal.component';
 
 @NgModule({
+  entryComponents: [PlaylistModalComponent],
   declarations: [
-    AppComponent
+    AppComponent,
+    PlaylistModalComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +23,8 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
