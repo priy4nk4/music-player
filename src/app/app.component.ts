@@ -4,7 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PlaylistModalComponent } from './playlist-modal/playlist-modal.component';
 import { ChangeDetectorRef } from '@angular/core';
 import { MusicService } from './service/music.service';
-import { Observable } from 'rxjs';
+import { playlist } from './model/playlist.model';
 
 @Component({
   selector: 'app-root',
@@ -15,22 +15,32 @@ export class AppComponent implements OnInit{
 
   constructor(private modalService: NgbModal, private cdref: ChangeDetectorRef, private music: MusicService){
   }
+
   title = 'music-player';
   @ViewChild('player', { static: false })
   msaapTableHeader! :string;
   msaapTitleHeader!:string;
   msaapArtistHeader!: string;
 
-  playList!: Track[];
+  allPlaylist!: string[];
+  allMusicList!: Track[];
   currentTrack: any = null;
+  allCustomPlaylist: playlist[] = [];
+  currentPlayList!:  Track[];
+
   currentTime: any;
+  
+
+  
   // appendTracksToPlaylistDisable = false;
   counter = 1;
   ngOnInit() {
     this.music.getMusiclist().subscribe((response: Track[]) => {
-      this.playList = response;
+      this.allMusicList = response;
     });
-    this.currentTrack = this.playList;
+    this.currentTrack = this.allMusicList;
+    this.currentPlayList = [...new Set(this.allMusicList)];
+ 
   }
 
   ngAfterContentChecked() {
@@ -41,13 +51,20 @@ export class AppComponent implements OnInit{
   }
 
   onEnded(event: any) {
-    console.log(event);
     this.currentTrack = null;
   }
-  playSong(index: number){
-    this.currentTrack = this.playList.slice(index);
+  goHome(){
+    this.currentPlayList = this.allMusicList;
   }
-  updatePlayList(){
-    this.modalService.open(PlaylistModalComponent);
+  playSong(index: number){
+    this.currentTrack = this.allMusicList.slice(index);
+  }
+  updatePlayList(song:Track){
+    const modalRef = this.modalService.open(PlaylistModalComponent);
+    modalRef.componentInstance.songObj = song;
+    modalRef.componentInstance.clickevent.subscribe((event: any) => {
+      this.allCustomPlaylist = this.music.all_custom_playlist;
+    })
+    console.log(this.allCustomPlaylist);
   }
 }

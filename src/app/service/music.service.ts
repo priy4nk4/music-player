@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Track } from 'ngx-audio-player';
 import { Observable, of } from 'rxjs';
+import { playlist } from '../model/playlist.model';
 
 
 @Injectable({
@@ -9,6 +10,7 @@ import { Observable, of } from 'rxjs';
 export class MusicService {
 
   constructor() { }
+  all_custom_playlist : playlist[] = [];
   music_list: Track[] = [
   
     {
@@ -90,5 +92,9 @@ export class MusicService {
 
   getMusiclist(): Observable<Track[]> {
     return of(this.music_list);
+  }
+
+  createPlaylist() {
+    
   }
 }
