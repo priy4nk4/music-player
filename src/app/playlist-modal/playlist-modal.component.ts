@@ -27,7 +27,7 @@ export class PlaylistModalComponent implements OnInit {
     this.isNewPlaylistClicked = true;
   }
 
-  CreatePlaylist(){
+  createPlaylist(){
     let obj : playlist = {title: '', playlist: []};
     obj.title = this.input.nativeElement.value;
     obj.playlist = [this.songObj];
@@ -37,7 +37,7 @@ export class PlaylistModalComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  addToPlaylist(song: any) {
+  addToPlaylist(song: playlist) {
     for(let i of this.custom_playlist){
       if(i.title == song.title){
         i.playlist.push(this.songObj);

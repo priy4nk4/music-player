@@ -22,10 +22,10 @@
                 <span class="tracking-widest">MY PLAYLISTS</span>
               </div>
               <div class="border border-gray-700"></div>
-              <ng-container *ngFor="let x of allCustomPlaylist; let i= index">
-                <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                  {{x.title}}
-                </a>
+              <ng-container *ngFor="let singlePlaylist of allCustomPlaylist; let i= index">
+                <button type="button" (click)="openCustomPlayList(singlePlaylist)"  class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                  {{singlePlaylist.title}}
+                </button>
               </ng-container>
             </nav>
           </div>
@@ -36,7 +36,6 @@
       <div class="md:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
         <button class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
           <span class="sr-only">Open sidebar</span>
-          <!-- Heroicon name: outline/menu -->
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -48,21 +47,20 @@
             <h1 class="text-xl font-semibold text-gray-900">My Music</h1>
           </div>
           <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-            <!-- Replace with your content -->
             <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-              <ng-container *ngFor="let x of currentPlayList; let i= index">
+              <ng-container *ngFor="let singleplay of currentPlayList; let i= index">
                 <li class="relative">
                   <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500  group block w-full aspect-w-10 aspect-h-7 rounded-lg overflow-hidden"
                   (click)="playSong(i)">
-                    <img [src]="x.image" alt="" class="group-hover:opacity-75 object-cover pointer-events-none h-48">
+                    <img [src]="singleplay.image" alt="" class="group-hover:opacity-75 object-cover pointer-events-none h-48">
                   </div>
                   <div class="flex justify-between mt-2">
                     <div>
-                      <p class=" block text-sm font-medium text-gray-900 truncate pointer-events-none">{{x.title}}</p>
-                      <p class="block text-sm font-medium text-gray-500 pointer-events-none">{{x.artist}}</p>
+                      <p class=" block text-sm font-medium text-gray-900 truncate pointer-events-none">{{singleplay.title}}</p>
+                      <p class="block text-sm font-medium text-gray-500 pointer-events-none">{{singleplay.artist}}</p>
                    
                     </div>
-                    <div class="text-sm flex" (click)="updatePlayList(x)" >
+                    <div class="text-sm flex" (click)="updatePlayList(singleplay)" >
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                         <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11h4m-2-2v4" />
@@ -72,98 +70,12 @@
                   </div>
                  </li>
               </ng-container>
-              <!--<li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 h-48 group block w-full aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none"></p>
-                <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-              </li>
-
-              <li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 h-48 group block w-full aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <div class="flex justify-between">
-                  <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">IMG_4985.HEIC</p>
-                  <div class="text-sm flex" (click)="updatePlayList()" >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                      <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11h4m-2-2v4" />
-                    </svg> <span>Add</span>
-                  </div>
-                  
-                </div>
-                <div class="flex justify-between">
-                  <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-                  <div class="text-sm flex" (click)="updatePlayList()" >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                      <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11h4" />
-                    </svg> <span>Remove</span> 
-                  </div>
-                  
-                </div>
-              </li>
-
-
-              <li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 group h-48 block w-full aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">IMG_4985.HEIC</p>
-                <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-              </li>
-
-
-              <li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 group block w-full h-48 aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">IMG_4985.HEIC</p>
-                <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-              </li>
-
-
-              <li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 group block w-full h-48 aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">IMG_4985.HEIC</p>
-                <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-              </li>
-              <li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 group block w-full h-48 aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">IMG_4985.HEIC</p>
-                <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-              </li>
-              <li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 group block w-full h-48 aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">IMG_4985.HEIC</p>
-                <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-              </li>
-              <li class="relative">
-                <div class="focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 group block w-full h-48 aspect-w-10 aspect-h-7 rounded-lg overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="group-hover:opacity-75 object-cover pointer-events-none">
-                </div>
-                <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none">IMG_4985.HEIC</p>
-                <p class="block text-sm font-medium text-gray-500 pointer-events-none">3.9 MB</p>
-              </li> -->
-
-              <!-- More files... -->
             </ul>
-
-            <!-- /End replace -->
           </div>
         </div>
       </main>
     </div>
   </div>
-      <!-- Static sidebar for desktop -->
       
   <div class="fixed w-full h-auto bottom-0 z-10 text-center bg-gray-100 border-t-2 border-gray-700">
     <ngx-audio-player #player (trackEnded)="onEnded($event)"

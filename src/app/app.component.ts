@@ -55,6 +55,7 @@ export class AppComponent implements OnInit{
   }
   goHome(){
     this.currentPlayList = this.allMusicList;
+    this.currentTrack = this.allMusicList;
   }
   playSong(index: number){
     this.currentTrack = this.allMusicList.slice(index);
@@ -66,5 +67,9 @@ export class AppComponent implements OnInit{
       this.allCustomPlaylist = this.music.all_custom_playlist;
     })
     console.log(this.allCustomPlaylist);
+  }
+  openCustomPlayList(customPlaylist: playlist){
+    this.currentPlayList = customPlaylist.playlist;
+    this.currentTrack = customPlaylist.playlist;
   }
 }
