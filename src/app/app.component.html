@@ -23,7 +23,7 @@
               </div>
               <div class="border border-gray-700"></div>
               <ng-container *ngFor="let singlePlaylist of allCustomPlaylist; let i= index">
-                <button type="button" (click)="openCustomPlayList(singlePlaylist)"  class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                <button type="button" (click)="gotoPlaylist(singlePlaylist)"  class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                   {{singlePlaylist.title}}
                 </button>
               </ng-container>
@@ -58,15 +58,22 @@
                     <div>
                       <p class=" block text-sm font-medium text-gray-900 truncate pointer-events-none">{{singleplay.title}}</p>
                       <p class="block text-sm font-medium text-gray-500 pointer-events-none">{{singleplay.artist}}</p>
-                   
+
                     </div>
-                    <div class="text-sm flex" (click)="updatePlayList(singleplay)" >
+                    <div class="text-sm flex" (click)="addToPlayList(singleplay)" *ngIf="!isCustomListExpanded">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                         <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11h4m-2-2v4" />
                       </svg> <span>Add</span>
                     </div>
-                    
+
+                    <div class="text-sm flex" (click)="removeFromPlayList(singleplay)" *ngIf="isCustomListExpanded">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                        <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11h4m-2-2v4" />
+                      </svg> <span>Remove</span>
+                    </div>
+
                   </div>
                  </li>
               </ng-container>
@@ -76,12 +83,12 @@
       </main>
     </div>
   </div>
-      
+
   <div class="fixed w-full h-auto bottom-0 z-10 text-center bg-gray-100 border-t-2 border-gray-700">
     <ngx-audio-player #player (trackEnded)="onEnded($event)"
-    [autoPlay]="true"
+    [autoPlay]="isAutoplayOn"
     [displayPlaylist]="false"
-    [displayTitle]="false"
+    [displayTitle]="true"
     [tableHeader]="msaapTableHeader"
     [titleHeader]="msaapTitleHeader"
     [artistHeader]="msaapArtistHeader"

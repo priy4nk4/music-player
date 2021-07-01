@@ -21,7 +21,8 @@ export class AppComponent implements OnInit{
   msaapTableHeader! :string;
   msaapTitleHeader!:string;
   msaapArtistHeader!: string;
-
+  isAutoplayOn: boolean = false;
+  isCustomListExpanded: boolean = false;
   allPlaylist!: string[];
   allMusicList!: Track[];
   currentTrack: any = null;
@@ -29,9 +30,9 @@ export class AppComponent implements OnInit{
   currentPlayList!:  Track[];
 
   currentTime: any;
-  
 
-  
+
+
   // appendTracksToPlaylistDisable = false;
   counter = 1;
   ngOnInit() {
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit{
     });
     this.currentTrack = this.allMusicList;
     this.currentPlayList = [...new Set(this.allMusicList)];
- 
+
   }
 
   ngAfterContentChecked() {
@@ -54,21 +55,31 @@ export class AppComponent implements OnInit{
     this.currentTrack = null;
   }
   goHome(){
+    this.isAutoplayOn = false;
+    this.isCustomListExpanded = false;
     this.currentPlayList = this.allMusicList;
     this.currentTrack = this.allMusicList;
   }
   playSong(index: number){
+    this.isAutoplayOn = true;
     this.currentTrack = this.allMusicList.slice(index);
   }
-  updatePlayList(song:Track){
+  addToPlayList(song:Track){
     const modalRef = this.modalService.open(PlaylistModalComponent);
     modalRef.componentInstance.songObj = song;
     modalRef.componentInstance.clickevent.subscribe((event: any) => {
       this.allCustomPlaylist = this.music.all_custom_playlist;
     })
-    console.log(this.allCustomPlaylist);
   }
-  openCustomPlayList(customPlaylist: playlist){
+
+  removeFromPlayList(song:Track) {
+    let removedIndex = this.currentPlayList.findIndex(ele=> ele.title == song.title)
+    this.currentPlayList.splice(removedIndex, 1);
+    // this.isCustomListExpanded = true;
+  }
+  gotoPlaylist(customPlaylist: playlist){
+    this.isCustomListExpanded = true;
+    this.isAutoplayOn = false;
     this.currentPlayList = customPlaylist.playlist;
     this.currentTrack = customPlaylist.playlist;
   }
