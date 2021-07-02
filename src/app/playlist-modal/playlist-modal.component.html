@@ -31,11 +31,6 @@
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 " *ngIf="isNewPlaylistClicked">
                 <div >
-                    <!-- <div>
-                        <label for="title" class="sr-only">Playlist title</label>
-                        <input id="playlist" name="name" type="text" autocomplete="text" required class="appearance-none border-0 
-                        relative block w-full px-3 py-2  border-b-2 placeholder-gray-500 text-gray-900 focus:outline-nones" placeholder="Playlist Title" #myname>
-                    </div> -->
                     <div class="mb-4">
                         <label for="title" class="sr-only">Playlist title</label>
                         <input type="text" name="name" id="playlist" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Playlist Title" 
@@ -52,13 +47,8 @@
                         </button>
                         <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  (click)="cancelPlaylist()">
                             Cancel
-                          </button>
-    
+                        </button>
                     </div>
-                   
-                    <!-- <div>
-                    <button type="button" (click)="createPlaylist(myname)">Save</button>
-                    </div> -->
                 </div>
             </div>
         </div>

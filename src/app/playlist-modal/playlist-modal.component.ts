@@ -12,9 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./playlist-modal.component.scss']
 })
 export class PlaylistModalComponent implements OnInit {
-  // @ViewChild('myname') input!: ElementRef; 
   @Input() songObj!: Track;
-  @Output() clickevent = new EventEmitter<any>();
   custom_playlist!: playlist[];
   isNewPlaylistClicked: boolean = false;
   topContentTitle!: string;
@@ -41,15 +39,10 @@ export class PlaylistModalComponent implements OnInit {
    
     if(this.custom_playlist.length == 0) {
       this.music.all_custom_playlist.push(obj); 
-      this.clickevent.emit(this.custom_playlist);
-      // this.custom_playlist.push(obj)
-    }
-    else {
+    } else {
       for(let i of this.custom_playlist){
         if (i.title != obj.title){
           this.music.all_custom_playlist.push(obj); 
-          this.clickevent.emit(this.custom_playlist);
-          // this.custom_playlist.push(obj)
         }
       }
     }
@@ -67,9 +60,7 @@ export class PlaylistModalComponent implements OnInit {
         } 
       }
     }
-    // this.music.all_custom_playlist.next(this.custom_playlist); 
     this.music.all_custom_playlist = this.custom_playlist; 
-    this.clickevent.emit(this.custom_playlist);
     this.activeModal.dismiss();
   }
   modelChangeFn(event: string){

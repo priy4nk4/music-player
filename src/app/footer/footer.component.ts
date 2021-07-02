@@ -10,11 +10,10 @@ export class FooterComponent implements OnInit {
   msaapTableHeader! :string;
   msaapTitleHeader!:string;
   msaapArtistHeader!: string;
-  isAutoplayOn: boolean = false;
   currentTrack: any = null;
 
 
-  constructor(private cdref: ChangeDetectorRef, private music: MusicService) {
+  constructor(private cdref: ChangeDetectorRef, public music: MusicService) {
     this.music.currentTrack.subscribe(ele=>{
       this.currentTrack = ele
     }) 

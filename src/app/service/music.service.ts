@@ -12,18 +12,11 @@ export class MusicService {
   playlistTitle : string ;
   all_custom_playlist : playlist[] = [];
   public isCardClicked: boolean = false;
-  // public isCardClicked = new Subject<boolean>();
-
   isAutoplayOn: boolean = false;
   isCustomListExpanded = new Subject<boolean>();
   allPlaylist!: string[];
-  // allMusicList!: Track[];
   public currentTrack = new Subject<Track[]>();
-  // public currentTrack!: Track[];
-  // currentTrack: any = null;
-  // all_custom_playlist = new Subject<playlist[]>();
   currentPlayList = new Subject<playlist[]>();
-  // currentPlayList!: playlist[];
   allMusicList: playlist[] = [{
     title: 'My Music',
     Tracks:   [

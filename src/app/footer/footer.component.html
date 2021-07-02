@@ -1,5 +1,5 @@
   <ngx-audio-player #player (trackEnded)="onEnded($event)"
-    [autoPlay]="true"
+    [autoPlay]="music.isAutoplayOn"
     [displayPlaylist]="false"
     [displayTitle]="true"
     [tableHeader]="msaapTableHeader"
