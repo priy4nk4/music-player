@@ -13,6 +13,8 @@ The project is a music player where users can do the following:
 - Tailwind CSS 2.2.4
 - ngx-audio-player 11.0.4
 
+## Demo
+[Project hosted on Netlify](https://trusting-joliot-6b2d8d.netlify.app/home)
 
 ## How to run development server?
 
