@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Track } from 'ngx-audio-player';
+import { Track } from '../model/Track.model';
 import { playlist } from '../model/playlist.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PlaylistModalComponent } from '../playlist-modal/playlist-modal.component';

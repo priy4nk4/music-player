@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Track } from 'ngx-audio-player';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { Track } from '../model/Track.model';
+import { Observable, of, Subject } from 'rxjs';
 import { playlist } from '../model/playlist.model';
 
 
@@ -11,7 +11,6 @@ export class MusicService {
 
   playlistTitle : string ;
   all_custom_playlist : playlist[] = [];
-  public isCardClicked: boolean = false;
   isAutoplayOn: boolean = false;
   isCustomListExpanded = new Subject<boolean>();
   allPlaylist!: string[];

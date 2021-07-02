@@ -1,4 +1,4 @@
-import { Track } from 'ngx-audio-player';
+import { Track } from './Track.model';
 
 export declare class playlist {
     title: string;

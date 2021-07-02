@@ -17,7 +17,6 @@ export class SideBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.allCustomPlaylist)
   }
   goToHome(){
     this.music.isAutoplayOn = false;
