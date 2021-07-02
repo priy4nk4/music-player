@@ -1,4 +1,3 @@
-import { ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Component, OnInit, Input } from '@angular/core';
 import { Track } from 'ngx-audio-player'; 
 import { MusicService } from '../service/music.service';
@@ -21,7 +20,7 @@ export class PlaylistModalComponent implements OnInit {
 
   constructor(private music : MusicService, public activeModal: NgbActiveModal) {
     this.custom_playlist = this.music.all_custom_playlist;
-   }
+  }
 
   ngOnInit(): void {
     this.topContentTitle = "Add to Playlist";
@@ -40,11 +39,8 @@ export class PlaylistModalComponent implements OnInit {
     if(this.custom_playlist.length == 0) {
       this.music.all_custom_playlist.push(obj); 
     } else {
-      for(let i of this.custom_playlist){
-        if (i.title != obj.title){
-          this.music.all_custom_playlist.push(obj); 
-        }
-      }
+      let titles = this.custom_playlist.map(ele=> ele.title);
+      if(!titles.includes(obj.title))this.music.all_custom_playlist.push(obj); 
     }
  
     this.isNewPlaylistClicked = false;

@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
     this.music.isAutoplayOn = true;
     this.currentTrack = this.currentPlayList[0].Tracks.slice(index);
     this.music.currentTrack.next(this.currentTrack);
-    this.music.isCardClicked = true;
   }
   
   addToPlayList(song:Track){
@@ -49,7 +48,6 @@ export class HomeComponent implements OnInit {
     if(this.currentPlayList[0].Tracks.length <=0) {
       let index = this.music.all_custom_playlist.findIndex(ele => ele.title == title);
       this.music.all_custom_playlist.splice(index, 1);
-      this.music.isCardClicked = false;
       this.music.currentPlayList.next(this.music.allMusicList);
       this.music.playlistTitle= 'My Music';
     }
