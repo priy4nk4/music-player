@@ -11,10 +11,15 @@
               <span class="tracking-widest">MY PLAYLISTS</span>
             </div>
             <div class="border border-gray-700"></div>
+            <div *ngIf="allCustomPlaylist.length === 0" class="text-white opacity-50 text-sm mt-4">No playlist added yet</div>
             <ng-container *ngFor="let singlePlaylist of allCustomPlaylist; let i= index">
-              <button type="button" (click)="gotoPlaylist(singlePlaylist)"  class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full">
-                {{singlePlaylist.title}}
-              </button>
+              <div class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center justify-between cursor-pointer px-2 py-2 text-sm font-medium rounded-md w-full" (click)="gotoPlaylist(singlePlaylist)">
+                <button type="button"   >
+                  {{singlePlaylist.title}} 
+                </button>
+                <span class="opacity-50">{{singlePlaylist.Tracks.length}} songs</span>
+              </div>
+              
             </ng-container>
           </nav>
         </div>

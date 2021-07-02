@@ -12,6 +12,7 @@ import { PlaylistModalComponent } from './playlist-modal/playlist-modal.componen
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   entryComponents: [PlaylistModalComponent],
@@ -30,7 +31,8 @@ import { FooterComponent } from './footer/footer.component';
     MatToolbarModule,
     MatButtonModule,
     MatSlideToggleModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

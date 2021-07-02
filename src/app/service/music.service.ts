@@ -9,9 +9,9 @@ import { playlist } from '../model/playlist.model';
 })
 export class MusicService {
 
-  constructor() { }
+  playlistTitle : string ;
   all_custom_playlist : playlist[] = [];
-  public isCardClicked: boolean = true;
+  public isCardClicked: boolean = false;
   // public isCardClicked = new Subject<boolean>();
 
   isAutoplayOn: boolean = false;
@@ -104,7 +104,9 @@ export class MusicService {
     ]
   }]
 
-
+  constructor() {
+    this.playlistTitle = this.allMusicList[0].title;
+   }
 
   getMusiclist(): Observable<playlist[]> {
     return of(this.allMusicList);

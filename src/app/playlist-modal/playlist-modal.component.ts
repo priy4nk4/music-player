@@ -18,6 +18,8 @@ export class PlaylistModalComponent implements OnInit {
   custom_playlist!: playlist[];
   isNewPlaylistClicked: boolean = false;
   topContentTitle!: string;
+  myTitle!: string;
+  btnDisable: boolean = true;
 
   constructor(private music : MusicService, public activeModal: NgbActiveModal) {
     this.custom_playlist = this.music.all_custom_playlist;
@@ -32,10 +34,11 @@ export class PlaylistModalComponent implements OnInit {
     this.topContentTitle = "New Playlist";
   }
 
-  createPlaylist(myname: any){
+  createPlaylist(){
     let obj : playlist = {title: '', Tracks: []};
-    obj.title = myname.value;
+    obj.title = this.myTitle;
     obj.Tracks = [this.songObj];
+   
     if(this.custom_playlist.length == 0) {
       this.music.all_custom_playlist.push(obj); 
       this.clickevent.emit(this.custom_playlist);
@@ -69,7 +72,14 @@ export class PlaylistModalComponent implements OnInit {
     this.clickevent.emit(this.custom_playlist);
     this.activeModal.dismiss();
   }
+  modelChangeFn(event: string){
+    let value = event.trim();
+    if(value.length > 0) this.btnDisable = false;
+    else{
+      this.btnDisable = true;
+    }
 
+  }
   cancelPlaylist() {
     this.activeModal.dismiss();
   }

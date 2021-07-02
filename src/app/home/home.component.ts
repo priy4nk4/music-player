@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  playlistTitle!: string;
   currentPlayList: playlist[] = [];
   isAutoplayOn: boolean = false;
   isCustomListExpanded!: boolean;
@@ -20,12 +19,12 @@ export class HomeComponent implements OnInit {
   allMusicList!: playlist[];
   currentTrack!: any;
   // allCustomPlaylist: playlist[] = [];
-  constructor(private modalService: NgbModal, private music: MusicService) { 
+  constructor(private modalService: NgbModal, public music: MusicService) { 
      this.music.currentPlayList.subscribe(ele=> this.currentPlayList = ele);
 
     console.log(this.currentPlayList);
     // this.currentPlayList = this.music.currentPlayList;
-     this.music.isCustomListExpanded.subscribe(res => this.isCustomListExpanded = res)
+     this.music.isCustomListExpanded.subscribe(res => this.isCustomListExpanded = res);
   }
 
   ngOnInit(): void {
@@ -40,7 +39,7 @@ export class HomeComponent implements OnInit {
     // this.currentTrack = this.allMusicList;
     this.currentPlayList =[...new Set(this.allMusicList)];
     this.music.currentPlayList.next(this.currentPlayList);
-    this.playlistTitle = this.currentPlayList[0].title;
+    // this.playlistTitle = this.music.playlistTitle;
     // this.music.currentPlayList = this.currentPlayList;
     console.log(this.music.currentPlayList);
     console.log(this.currentPlayList);
@@ -79,6 +78,8 @@ export class HomeComponent implements OnInit {
       let index = this.music.all_custom_playlist.findIndex(ele => ele.title == title);
       this.music.all_custom_playlist.splice(index, 1);
       this.music.isCardClicked = false;
+      this.music.currentPlayList.next(this.music.allMusicList);
+      this.music.playlistTitle= 'My Music';
     }
   }
 }

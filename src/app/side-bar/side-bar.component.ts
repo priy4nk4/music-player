@@ -26,6 +26,8 @@ export class SideBarComponent implements OnInit {
     this.isAutoplayOn = false;
     this.music.isCustomListExpanded.next(false);
     this.music.currentPlayList.next(this.music.allMusicList);
+    this.music.playlistTitle= 'My Music';
+
     // this.music.currentPlayList = this.music.allMusicList;
     // this.currentPlayList = this.allMusicList;
     // this.music.currentTrack.next(this.music.allMusicList);
@@ -38,6 +40,7 @@ export class SideBarComponent implements OnInit {
   // }
   gotoPlaylist(customPlaylist: playlist){
     // this.isCustomListExpanded = true;
+    this.music.playlistTitle= customPlaylist.title;
     this.isAutoplayOn = false;
     // this.currentPlayList = customPlaylist.playlist;
     // this.music.currentTrack.next(customPlaylist.Tracks);

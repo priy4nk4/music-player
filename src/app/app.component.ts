@@ -30,8 +30,6 @@ export class AppComponent implements OnInit{
   currentPlayList!:  Track[];
 
   currentTime: any;
-  isCardClicked!: boolean;
-
 
 
   // appendTracksToPlaylistDisable = false;
