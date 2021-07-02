@@ -17,17 +17,19 @@ export class PlaylistModalComponent implements OnInit {
   @Output() clickevent = new EventEmitter<any>();
   custom_playlist!: playlist[];
   isNewPlaylistClicked: boolean = false;
+  topContentTitle!: string;
 
   constructor(private music : MusicService, public activeModal: NgbActiveModal) {
     this.custom_playlist = this.music.all_custom_playlist;
    }
 
   ngOnInit(): void {
-
+    this.topContentTitle = "Add to Playlist";
     
   }
   expandPlaylist(){
     this.isNewPlaylistClicked = true;
+    this.topContentTitle = "New Playlist";
   }
 
   createPlaylist(myname: any){
@@ -65,6 +67,10 @@ export class PlaylistModalComponent implements OnInit {
     // this.music.all_custom_playlist.next(this.custom_playlist); 
     this.music.all_custom_playlist = this.custom_playlist; 
     this.clickevent.emit(this.custom_playlist);
+    this.activeModal.dismiss();
+  }
+
+  cancelPlaylist() {
     this.activeModal.dismiss();
   }
 

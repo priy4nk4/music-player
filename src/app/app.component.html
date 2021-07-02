@@ -1,8 +1,8 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="h-screen bg-gray-100">
-  <div class=" flex bg-gray-100">
-    <app-side-bar></app-side-bar>
-    <app-home></app-home>
+<div class="bg-gray-100">
+  <div class="flex h-screen  overflow-hidden bg-gray-100">
+    <app-side-bar class="flex flex-shrink-0"></app-side-bar>
+    <app-home class="overflow-y-auto bottom-spacing"></app-home>
   </div>
 
   <div class="fixed w-full h-auto bottom-0 z-10 text-center bg-gray-100 border-t-2 border-gray-700" *ngIf="music.isCardClicked">

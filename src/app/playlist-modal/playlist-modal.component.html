@@ -5,41 +5,56 @@
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <div class="bg-gray-600 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div class=" text-left ml-4">
+                <div class=" text-left">
                   <h3 class="text-lg leading-6 font-medium text-white" id="modal-title">
-                    Add to Playlist
+                    {{topContentTitle}}
                   </h3>
                 </div>
             </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex">
-                <div class="mt-2 flex" (click)="expandPlaylist()">
+         
+            <ng-container *ngFor="let x of custom_playlist">
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 hover:bg-gray-200 cursor-pointer" *ngIf="custom_playlist.length>0 && !isNewPlaylistClicked">
+                <div class="flex items-center justify-between" (click)="addToPlaylist(x)">
+                    <h4>{{x.title}}</h4>
+                </div>
+            </div>
+            </ng-container>
+            <div class="bg-indigo-100 px-4 py-3 sm:px-6 sm:flex" *ngIf="!isNewPlaylistClicked">
+                <div class="flex text-indigo-600" (click)="expandPlaylist()" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
-                    <h3 class="text-lg leading-6 font-medium text-black">
+                    <h3 class="text-lg leading-6 font-medium">
                         New Playlist
                     </h3>
                 </div>
             </div>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 " *ngIf="isNewPlaylistClicked">
-                <div class="flex items-center justify-around">
-                    <div>
+                <div >
+                    <!-- <div>
                         <label for="title" class="sr-only">Playlist title</label>
                         <input id="playlist" name="name" type="text" autocomplete="text" required class="appearance-none border-0 
                         relative block w-full px-3 py-2  border-b-2 placeholder-gray-500 text-gray-900 focus:outline-nones" placeholder="Playlist Title" #myname>
+                    </div> -->
+                    <div class="mb-4">
+                        <label for="title" class="sr-only">Playlist title</label>
+                        <input type="text" name="name" id="playlist" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Playlist Title" #myname>
                     </div>
-                    <div>
+                    <div class="flex justify-end">
+                        <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-2"
+                        (click)="createPlaylist(myname)">
+                        Save
+                        </button>
+                        <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  (click)="cancelPlaylist()">
+                            Cancel
+                          </button>
+    
+                    </div>
+                   
+                    <!-- <div>
                     <button type="button" (click)="createPlaylist(myname)">Save</button>
-                    </div>
+                    </div> -->
                 </div>
-            </div>
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 ">
-                <ng-container *ngFor="let x of custom_playlist">
-                    <div class="flex items-center justify-between">
-                        <h4>{{x.title}}</h4>
-                        <button type="button" (click)="addToPlaylist(x)">Add</button>
-                    </div>
-                </ng-container>
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@ export class MusicService {
   currentPlayList = new Subject<playlist[]>();
   // currentPlayList!: playlist[];
   allMusicList: playlist[] = [{
-    title: 'Home',
+    title: 'My Music',
     Tracks:   [
       {
         title: 'Better Days',

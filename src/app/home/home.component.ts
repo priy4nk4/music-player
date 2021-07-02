@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  playlistTitle!: string;
   currentPlayList: playlist[] = [];
   isAutoplayOn: boolean = false;
   isCustomListExpanded!: boolean;
@@ -32,13 +33,14 @@ export class HomeComponent implements OnInit {
     this.music.getMusiclist().subscribe((response: playlist[]) => {
       this.allMusicList = response;
     });
+  
     
     let x = this.allMusicList.map(ele => ele.Tracks);
     console.log(x);
     // this.currentTrack = this.allMusicList;
     this.currentPlayList =[...new Set(this.allMusicList)];
     this.music.currentPlayList.next(this.currentPlayList);
-
+    this.playlistTitle = this.currentPlayList[0].title;
     // this.music.currentPlayList = this.currentPlayList;
     console.log(this.music.currentPlayList);
     console.log(this.currentPlayList);
