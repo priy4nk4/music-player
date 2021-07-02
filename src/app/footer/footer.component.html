@@ -1,0 +1,10 @@
+  <ngx-audio-player #player (trackEnded)="onEnded($event)"
+    [autoPlay]="true"
+    [displayPlaylist]="false"
+    [displayTitle]="true"
+    [tableHeader]="msaapTableHeader"
+    [titleHeader]="msaapTitleHeader"
+    [artistHeader]="msaapArtistHeader"
+    [disablePositionSlider]="false"
+    [playlist]="currentTrack">
+  </ngx-audio-player>

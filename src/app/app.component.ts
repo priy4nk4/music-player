@@ -13,7 +13,7 @@ import { playlist } from './model/playlist.model';
 })
 export class AppComponent implements OnInit{
 
-  constructor(private modalService: NgbModal, private cdref: ChangeDetectorRef, private music: MusicService){
+  constructor(private modalService: NgbModal, private cdref: ChangeDetectorRef, public music: MusicService){
   }
 
   title = 'music-player';
@@ -22,25 +22,30 @@ export class AppComponent implements OnInit{
   msaapTitleHeader!:string;
   msaapArtistHeader!: string;
   isAutoplayOn: boolean = false;
-  isCustomListExpanded: boolean = false;
+  // isCustomListExpanded: boolean = false;
   allPlaylist!: string[];
   allMusicList!: Track[];
-  currentTrack: any = null;
-  allCustomPlaylist: playlist[] = [];
+  // currentTrack: any = null;
+  // allCustomPlaylist: playlist[] = [];
   currentPlayList!:  Track[];
 
   currentTime: any;
+  isCardClicked!: boolean;
 
 
 
   // appendTracksToPlaylistDisable = false;
   counter = 1;
   ngOnInit() {
-    this.music.getMusiclist().subscribe((response: Track[]) => {
-      this.allMusicList = response;
-    });
-    this.currentTrack = this.allMusicList;
-    this.currentPlayList = [...new Set(this.allMusicList)];
+    // this.music.isCardClicked.next(false);
+    // this.music.isCardClicked.subscribe(value => this.isCardClicked = value)
+    this.music.isCustomListExpanded.next(false);
+    // this.music.getMusiclist().subscribe((response: Track[]) => {
+    //   this.allMusicList = response;
+    // });
+    // this.currentTrack = this.allMusicList;
+    // this.currentPlayList = [...new Set(this.allMusicList)];
+
 
   }
 
@@ -51,24 +56,25 @@ export class AppComponent implements OnInit{
     this.cdref.detectChanges();
   }
 
-  onEnded(event: any) {
-    this.currentTrack = null;
-  }
+
   goHome(){
     this.isAutoplayOn = false;
-    this.isCustomListExpanded = false;
+    // this.isCustomListExpanded = false;
     this.currentPlayList = this.allMusicList;
-    this.currentTrack = this.allMusicList;
+    // this.music.currentTrack.next(this.allMusicList);
+    // this.currentTrack = this.allMusicList;
   }
   playSong(index: number){
     this.isAutoplayOn = true;
-    this.currentTrack = this.allMusicList.slice(index);
+    // this.music.currentTrack.next(this.allMusicList.slice(index));
+
+    // this.currentTrack = this.allMusicList.slice(index);
   }
   addToPlayList(song:Track){
     const modalRef = this.modalService.open(PlaylistModalComponent);
     modalRef.componentInstance.songObj = song;
     modalRef.componentInstance.clickevent.subscribe((event: any) => {
-      this.allCustomPlaylist = this.music.all_custom_playlist;
+      // this.allCustomPlaylist = this.music.all_custom_playlist;
     })
   }
 
@@ -77,10 +83,12 @@ export class AppComponent implements OnInit{
     this.currentPlayList.splice(removedIndex, 1);
     // this.isCustomListExpanded = true;
   }
-  gotoPlaylist(customPlaylist: playlist){
-    this.isCustomListExpanded = true;
-    this.isAutoplayOn = false;
-    this.currentPlayList = customPlaylist.playlist;
-    this.currentTrack = customPlaylist.playlist;
-  }
+  // gotoPlaylist(customPlaylist: playlist){
+  //   this.isCustomListExpanded = true;
+  //   this.isAutoplayOn = false;
+  //   this.currentPlayList = customPlaylist.playlist;
+  //   this.music.currentTrack.next(customPlaylist.playlist);
+    
+  //   // this.currentTrack = customPlaylist.playlist;
+  // }
 }

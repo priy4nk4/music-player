@@ -9,12 +9,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PlaylistModalComponent } from './playlist-modal/playlist-modal.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   entryComponents: [PlaylistModalComponent],
   declarations: [
     AppComponent,
-    PlaylistModalComponent
+    PlaylistModalComponent,
+    SideBarComponent,
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
